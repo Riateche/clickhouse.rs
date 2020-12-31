@@ -17,6 +17,9 @@ fn is_wrapper(schemas: &Schemas) -> bool {
 /// Collects all field names in depth and joins them with comma.
 pub fn join_field_names<T: Reflection>() -> Option<String> {
     fn add_part(result: &mut String, path: &[&str], name: &str) {
+        // Hack!
+        let name = if name == "type_" { "type" } else { name };
+
         if !result.is_empty() {
             result.push(',');
         }
